@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root {
+  background-color: oklch(54.1% 0.281 293.009);
+}
+body {
+  background-color: oklch(54.1% 0.281 293.009);
+}
