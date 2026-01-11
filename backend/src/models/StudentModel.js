@@ -5,6 +5,10 @@ const studentSchema = new mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'User'
     },
+    parentUserId : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'User'
+    },
     rollNumber : {
         type : String,
         required : true,

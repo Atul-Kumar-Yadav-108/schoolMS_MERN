@@ -31,7 +31,7 @@ export const register = asyncHandler(async (req, res) => {
     const hashedPassword = await hashPassword(password);
 
     // saving record 
-    const user = await userModel({ name, email, password, role }).save();
+    const user = await userModel({ name, email, password : hashedPassword, role }).save();
     const token = generateToken(user);
     res.status(201).json({ success:true, message : "User Registration successfull",user, token });
 
@@ -53,6 +53,7 @@ export const login = asyncHandler(async (req, res) => {
             message: "Not a valid user.Create account."
         })
     }
+    console.log(user)
     // compare password
     const isMatch = await comparePassword(password, user.password);
     if(!isMatch){
@@ -66,4 +67,8 @@ export const login = asyncHandler(async (req, res) => {
     const token =  generateToken(user);
 
      res.status(201).json({ success:true, message : "Login successfull successfull",user, token });
+})
+
+export const me = asyncHandler(async(req,res)=>{
+    res.json(req.user);
 })
