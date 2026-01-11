@@ -35,5 +35,8 @@ const studentSchema = new mongoose.Schema({
 // Optional: unique roll number per class
 studentSchema.index({ classId: 1, rollNumber: 1 }, { unique: true });
 
+// Optional: unique user and unique parent
+studentSchema.index({ userId: 1, parentUserId: 1 }, { unique: true });
+
 const studentModel = mongoose.model("Student",studentSchema);
 export default studentModel;
