@@ -1,7 +1,9 @@
 import app from "./src/app.js"
 import authRoute from './src/routes/authRoute.js'
+import classRoute from './src/routes/classRoute.js'
 
 app.use("/api/v1/auth",authRoute);
+app.use("/api/v1/class",classRoute);
 
 
 const PORT = process.env.PORT || 8080;

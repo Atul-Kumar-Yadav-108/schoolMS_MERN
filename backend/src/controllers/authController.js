@@ -1,4 +1,4 @@
-import { asyncHandler } from "../../handlers/asyncHanlder.js";
+import { asyncHandler } from "../handlers/asyncHanlder.js";
 import userModel from "../models/UserModel.js";
 import { comparePassword, hashPassword } from "../utils/authUtils.js";
 import jwt from "jsonwebtoken";
@@ -10,8 +10,8 @@ const generateToken = (user) => {
 }
 
 export const register = asyncHandler(async (req, res) => {
-    const { name, email, password, role } = req.body;
-    if (!name || !email || !password) {
+    const { name, email, password, answer, role } = req.body;
+    if (!name || !email || !password || !answer) {
         return res.status(400).json({
             success: false,
             message: "All fields are required"
@@ -31,7 +31,7 @@ export const register = asyncHandler(async (req, res) => {
     const hashedPassword = await hashPassword(password);
 
     // saving record 
-    const user = await userModel({ name, email, password : hashedPassword, role }).save();
+    const user = await userModel({ name, answer, email, password : hashedPassword, role }).save();
     const token = generateToken(user);
     res.status(201).json({ success:true, message : "User Registration successfull",user, token });
 

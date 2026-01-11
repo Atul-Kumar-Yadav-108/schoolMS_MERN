@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-import { asyncHandler } from '../../handlers/asyncHanlder.js';
 import userModel from '../models/UserModel.js';
+import { asyncHandler } from '../handlers/asyncHanlder.js';
 
 export const requireSignin = asyncHandler(async(req,res,next)=>{
     const token = req.headers.authorization;
@@ -24,13 +24,13 @@ export const requireSignin = asyncHandler(async(req,res,next)=>{
  *  usage : checkRole("ADMIN","STUDENT","TEACHER")
  */
 
-export const checkRole = asyncHandler(async(...allowedRoles)=>{
-    return (req, res, next)=>{
-        if(!allowedRoles.includes(req.user.role)){
+export const checkRole = (...allowedRoles) => {
+    return (req, res, next) => {
+        if (!allowedRoles.includes(req.user.role)) {
             return res.status(403).json({
                 message: "Access denied",
             });
         }
         next();
-    }
-})
+    };
+};
